@@ -171,7 +171,7 @@ class NovaDependencyContainer extends Field
 
             if (array_key_exists('multiSelectContains', $dependency)) {
                 $exists = false;
-                $ids    = $resource->{$dependency['field']}->pluck('id')->toArray;
+                $ids    = $resource->{$dependency['field']}->pluck('id')->toArray();
                 if (in_array($dependency['multiSelectContains'], $ids)) {
                     $exists = true;
                 }
