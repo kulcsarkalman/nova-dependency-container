@@ -112,6 +112,21 @@
 
 					// #93 compatability with flexible-content, which adds a generated attribute for each field
 					let dependencyValue = this.dependencyValues[(this.field.attribute + dependency.field)];
+
+					if (dependency.hasOwnProperty("multiSelectContains")) {
+						var exists = false;
+						for (const i in dependencyValue) {
+							if (
+								dependencyValue[i] == dependency.multiSelectContains || // needed for when selecting and deselecting options from the dd
+								dependencyValue[i].id == dependency.multiSelectContains //needed for when opening up a resource for editing
+							) {
+								exists = true;
+							}
+						}
+						this.dependenciesSatisfied = exists;
+						return;
+					}
+		
 					if (dependency.hasOwnProperty('empty') && !dependencyValue) {
 						this.dependenciesSatisfied = true;
 						return;
